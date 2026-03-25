@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Agency Dashboard</title>
+
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+</head>
+
+<body class="container mt-4">
+
+<h2>Manage Cars</h2>
+
+<button class="btn btn-danger mb-3"
+        onclick="logout()">
+    Logout
+</button>
+
+<h4>Add New Car</h4>
+
+<input id="model"
+       class="form-control mb-2"
+       placeholder="Vehicle Model">
+
+<input id="number"
+       class="form-control mb-2"
+       placeholder="Vehicle Number">
+
+<input id="seats"
+       class="form-control mb-2"
+       placeholder="Seating Capacity">
+
+<input id="rent"
+       class="form-control mb-3"
+       placeholder="Rent Per Day">
+
+<button class="btn btn-success mb-4"
+        onclick="addCar()">
+    Add Car
+</button>
+
+<table class="table table-bordered">
+
+    <thead>
+        <tr>
+            <th>Model</th>
+            <th>Number</th>
+            <th>Seats</th>
+            <th>Rent</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+
+    <tbody id="carTable">
+    </tbody>
+
+</table>
+
+<script src="js/api.js"></script>
+<script src="js/agency.js"></script>
+
+</body>
+</html>
