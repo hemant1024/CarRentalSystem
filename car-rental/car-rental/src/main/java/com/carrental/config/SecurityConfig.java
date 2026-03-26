@@ -39,10 +39,10 @@ public class SecurityConfig {
 
                         .requestMatchers(
                                 "/",
-                                "/login.html",
-                                "/register.html",
+                                "/*.html",
                                 "/css/**",
-                                "/js/**"
+                                "/js/**",
+                                "/favicon.ico"
                         ).permitAll()
 
                         // public endpoints
@@ -91,7 +91,10 @@ public class SecurityConfig {
                 new CorsConfiguration();
 
         configuration.setAllowedOrigins(
-                List.of("http://127.0.0.1:5500")
+                List.of(
+                        "http://127.0.0.1:5500",
+                        "https://carrentalsystem-wjxl.onrender.com"
+                )
         );
 
         configuration.setAllowedMethods(
