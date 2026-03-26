@@ -1,155 +1,171 @@
 # Car Rental System
 
-## Project Overview
+## Overview
 
-The **Car Rental System** is a full-stack web application that allows customers to browse and book rental cars, while agencies can manage their vehicle inventory. The system implements role-based authentication using JWT and supports complete booking management.
-
-This project was developed as part of a guided software development walkthrough and demonstrates the integration of a Java Spring Boot backend with a simple HTML, CSS, and JavaScript frontend.
+This is a full-stack **Car Rental System** that allows customers to browse and book cars, and agencies to manage vehicle inventory.
+The backend is built using **Java Spring Boot**, and the frontend uses **HTML, CSS, JavaScript, and Bootstrap**.
+Authentication is handled using **JWT (JSON Web Token)**.
 
 ---
 
 ## Tech Stack
 
-### Backend
-
 * Java
 * Spring Boot
-* Spring Security (JWT Authentication)
+* Spring Security (JWT)
 * Spring Data JPA
 * MySQL
-* Maven
-
-### Frontend
-
-* HTML
-* CSS
-* JavaScript
+* HTML / CSS / JavaScript
 * Bootstrap
 
-### Tools
+---
 
-* Postman (API Testing)
-* MySQL Workbench
-* VS Code / IntelliJ IDEA
+## Prerequisites
+
+Make sure the following are installed:
+
+* Java 17 or later
+* Maven
+* MySQL
+* Git
 
 ---
 
-## Features
+## Database Setup
 
-### Authentication
+Create a database in MySQL:
 
-* User registration (Customer / Agency)
-* Secure login using JWT
-* Role-based access control
-* Logout functionality
-
-### Customer Features
-
-* View available cars
-* Book a car
-* View personal bookings
-* Cancel booking
-
-### Agency Features
-
-* Add new car
-* Update car details
-* Delete car
-* View bookings for their cars
-
----
-
-## Database Tables
-
-The system uses the following tables:
-
-```
-users
-cars
-bookings
-```
-
----
-
-## How to Run the Project
-
-### Step 1 — Start MySQL
-
-Make sure MySQL server is running.
-
-Create a database:
-
-```
+```sql
 CREATE DATABASE car_rental;
 ```
 
-Update database configuration in:
+Import the provided SQL file:
 
-```
-application.properties
+```text
+car_rental.sql
 ```
 
-Example:
+You can import using:
 
-```
-spring.datasource.url=jdbc:mysql://localhost:3306/car_rental
-spring.datasource.username=root
-spring.datasource.password=your_password
-spring.jpa.hibernate.ddl-auto=update
+* MySQL Workbench
+  OR
+
+```bash
+mysql -u root -p car_rental < car_rental.sql
 ```
 
 ---
 
-### Step 2 — Run Backend
+## Backend Configuration
 
-Open the backend project and run:
+Open:
 
+```text
+src/main/resources/application.properties
 ```
+
+Update database credentials:
+
+```properties
+spring.datasource.url=jdbc:mysql://localhost:3306/car_rental
+spring.datasource.username=root
+spring.datasource.password=your_password
+
+spring.jpa.hibernate.ddl-auto=update
+spring.jpa.show-sql=true
+spring.jpa.properties.hibernate.format_sql=true
+
+server.port=8080
+```
+
+---
+
+## Run Backend Locally
+
+From the backend root directory, run:
+
+```bash
+mvn clean install
 mvn spring-boot:run
 ```
 
-Or run the main class:
+OR
 
-```
-CarRentalApplication.java
+```bash
+java -jar target/*.jar
 ```
 
 Backend will start at:
 
-```
+```text
 http://localhost:8080
+```
+
+Test API:
+
+```text
+http://localhost:8080/api/cars
 ```
 
 ---
 
-### Step 3 — Run Frontend
+## Run Frontend Locally
 
-Open:
+Open the frontend entry file:
 
+```text
+index.html
 ```
-frontend/login.html
-```
+
+You can use:
+
+* Live Server (VS Code)
+  OR
+* Any browser
 
 Frontend will run at:
 
-```
+```text
 http://127.0.0.1:5500
 ```
 
 ---
 
+## Default Application Flow
+
+### Customer
+
+1. Register as CUSTOMER
+2. Login
+3. View available cars
+4. Book a car
+5. View bookings
+6. Cancel booking
+
+### Agency
+
+1. Register as AGENCY
+2. Login
+3. Add car
+4. Update car
+5. Delete car
+6. View bookings
+
+---
+
+
 ## API Endpoints
 
 ### Authentication
 
-```
+```text
 POST /api/auth/register
 POST /api/auth/login
 ```
 
 ### Cars
 
-```
+```text
 GET    /api/cars
 POST   /api/cars
 PUT    /api/cars/{id}
@@ -158,7 +174,7 @@ DELETE /api/cars/{id}
 
 ### Bookings
 
-```
+```text
 POST   /api/bookings
 GET    /api/bookings
 DELETE /api/bookings/{id}
@@ -166,49 +182,22 @@ DELETE /api/bookings/{id}
 
 ### Agency
 
-```
+```text
 GET /api/agency/bookings
 ```
 
 ---
 
-## Test Users (Example)
+## Security
 
-### Customer
-
-```
-Email: customer@test.com
-Password: 123456
-Role: CUSTOMER
-```
-
-### Agency
-
-```
-Email: agency@test.com
-Password: 123456
-Role: AGENCY
-```
-
----
-
-## Notes
-
-* JWT authentication is used for secure API access.
-* Role-based redirection is implemented after login.
-* CORS is configured to allow frontend-backend communication.
-* Passwords are securely encrypted using BCrypt.
+* JWT authentication implemented
+* Passwords encrypted using BCrypt
+* Role-based access control (CUSTOMER / AGENCY)
 
 ---
 
 ## Author
 
-**Name:** Hemant Wandhare
-**Role:** Full Stack Developer
-**Technology:** Java Spring Boot + Angular/HTML/JS
-
----
-
-## Conclusion
-
-This project demonstrates a complete end-to-end implementation of a role-based car rental system with authentication, booking management, and inventory control. It fulfills the functional requirements of the walkthrough and provides a working full-stack solution suitable for academic submission.
+Hemant Wandhare
+Full Stack Developer
+Java | Spring Boot | Web Development
