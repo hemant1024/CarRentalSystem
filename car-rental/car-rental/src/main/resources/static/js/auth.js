@@ -8,40 +8,65 @@ async function login() {
     const password =
         document.getElementById("password").value;
 
-    const response =
-        await fetch(
-            BASE_URL + "/auth/login",
-            {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({
-                    email,
-                    password
-                })
-            }
+    try {
+
+        const response =
+            await fetch(
+                BASE_URL + "/auth/login",
+                {
+                    method: "POST",
+
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+
+                    body: JSON.stringify({
+                        email,
+                        password
+                    })
+                }
+            );
+
+        if (!response.ok) {
+
+            alert("Invalid email or password");
+
+            return;
+        }
+
+        const token =
+            await response.text();
+
+        localStorage.setItem(
+            "token",
+            token
         );
 
-    const token = await response.text();
+        alert("Login successful");
 
-    localStorage.setItem("token", token);
+        const role =
+            getUserRole();
 
-    alert("Login successful");
+        if (role === "AGENCY") {
 
-    const role = getUserRole();
+            window.location.href =
+                "agency-dashboard.html";
 
-    if (role === "AGENCY") {
+        } else {
 
-        window.location.href =
-            "agency-dashboard.html";
+            window.location.href =
+                "customer-dashboard.html";
 
-    } else {
+        }
 
-        window.location.href =
-            "customer-dashboard.html";
+    } catch (error) {
+
+        console.error(error);
+
+        alert("Server error. Please try again.");
 
     }
+
 }
 
 async function register() {
