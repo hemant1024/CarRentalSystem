@@ -37,6 +37,14 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.OPTIONS, "/**")
                         .permitAll()
 
+                        .requestMatchers(
+                                "/",
+                                "/login.html",
+                                "/register.html",
+                                "/css/**",
+                                "/js/**"
+                        ).permitAll()
+
                         // public endpoints
                         .requestMatchers("/api/auth/**")
                         .permitAll()
