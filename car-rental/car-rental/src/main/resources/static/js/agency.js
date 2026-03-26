@@ -155,10 +155,14 @@ async function updateCar(id) {
 
 function logout() {
 
+    console.log("Logout clicked");
+
+    alert("Logging out");
+
     localStorage.removeItem("token");
 
-    window.location.replace =
-        "login.html";
+    window.location.href = "login.html";
+
 }
 
 window.onload = loadCars;

@@ -115,3 +115,15 @@ async function register() {
 
     }
 }
+
+function logout() {
+
+    console.log("Logout clicked");
+
+    alert("Logging out");
+
+    localStorage.removeItem("token");
+
+    window.location.href = "login.html";
+
+}
